@@ -6,7 +6,7 @@ import numpy as np
 
 st.set_page_config(page_title="Tool wear prediction",page_icon="memo",layout="wide")
 
-img1 = Image.open('head.png')
+img1 = Image.open('logo1.png')
 
 st.header("Predicted tool wear value")
 
