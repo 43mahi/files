@@ -4,15 +4,15 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 import numpy as np
 
-st.set_page_config(page_title="Roughness Prediction App",page_icon="memo",layout="wide")
+st.set_page_config(page_title="Tool wear prediction",page_icon="memo",layout="wide")
 
 img1 = Image.open('head.png')
 
-st.header("Predicted Roughness of a Tool")
+st.header("Predicted tool wear value")
 
 
 st.sidebar.image(img1)
-st.sidebar.header("Predict Tool Roughness")
+st.sidebar.header("Predict Tool Wear")
 img = st.sidebar.file_uploader("Choose Input Image",type=["jpg"])
 
 def r2_score(y_true,y_pred):
@@ -24,7 +24,7 @@ model = load_model('surface_model.h5',custom_objects={"r2_score": r2_score})
 
 if img:
 	img = Image.open(img)
-	st.image(img,caption="Tool Image")
+	st.image(img,caption="Surface Image")
 	img_grey = img.convert("L")
 	img_grey = img_grey.resize((64,64))
 	imgs = np.array(img_grey)
@@ -32,5 +32,5 @@ if img:
 
 	roughness = model.predict(data)
 
-	if st.sidebar.button("Predict Roughness "):
-    		st.subheader("Roughness : {}".format(roughness[0][0]))
+	if st.sidebar.button("Predict ToolWear "):
+    		st.subheader("Tool wear : {}".format(roughness[0][0]))
